@@ -1,0 +1,28 @@
+<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Milk</title>
+    <link rel="stylesheet" href="color.css">
+</head>
+<body>
+<div>
+    <div class="container">
+        <h3 class="header">
+            Welcome to Milk operator!
+        </h3>
+        <div class="image">
+            <img src="milk.jpg" alt="">
+        </div>
+        <p id="hostname"></p>
+        <p id="datetime"></p>
+    </div>
+</div>
+<script>
+    let hostname = location.hostname;
+    document.getElementById("hostname").innerHTML = hostname;
+
+    var dt = new Date();
+    document.getElementById("datetime").innerHTML=dt.toLocaleString();
+</script>
+</body>
+</html>

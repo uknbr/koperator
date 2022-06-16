@@ -1,0 +1,12 @@
+apiVersion: uknbr.io/v1
+kind: Milk
+metadata:
+  name: first-operator
+spec:
+  replicas: 1
+  url: "https://www.greenqueen.com.hk/wp-content/uploads/2020/01/turtletree-labs.jpg"
+
+
+#https://www.greenqueen.com.hk/wp-content/uploads/2020/01/turtletree-labs.jpg
+#https://www.gannett-cdn.com/-mm-/4e57f417ab56d8147a59ed2deb8f3a4b0b446da3/c=0-108-2120-1306/local/-/media/2017/02/28/USATODAY/USATODAY/636238697589955973-GettyImages-479352566.jpg
+#https://www.thoughtco.com/thmb/EO0W0UlKlI-VcsHsuQe0mFh6KFk=/395x0/filters:no_upscale():max_bytes(150000):strip_icc()/glass-of-milk-pouring-87984584-593d45d33df78c537b632490.jpg
