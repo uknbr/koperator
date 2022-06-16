@@ -1,0 +1,23 @@
+apiVersion: uknbr.io/v1
+kind: IndicatorPod
+metadata:
+  name: level-3
+spec:
+  restarts: 3
+  label: "problem"
+---
+apiVersion: uknbr.io/v1
+kind: IndicatorPod
+metadata:
+  name: level-2
+spec:
+  restarts: 2
+  label: "warning"
+---
+apiVersion: uknbr.io/v1
+kind: IndicatorPod
+metadata:
+  name: level-1
+spec:
+  restarts: 0
+  label: "success"
