@@ -39,8 +39,7 @@ def on_create(spec, name, namespace, logger, **kwargs):
                     "containers": [
                         {
                             "name": f"milk-{name}",
-                            "image": "k3d-devops-challenge-registry:5000/milk:latest",
-                            "resources": {}
+                            "image": "uknbr/milk:latest",
                         }
                     ]
                 }
@@ -93,5 +92,46 @@ def on_create(spec, name, namespace, logger, **kwargs):
     except ApiException as e:
         logger.error(f"Failed to create service: {repr(e)}")
 
+    json = {
+        "apiVersion": "networking.k8s.io/v1",
+        "kind": "Ingress",
+        "metadata": {
+            "name": f"milk-{name}"
+        },
+        "spec": {
+            "rules": [
+                {
+                    "host": "localhost",
+                    "http": {
+                        "paths": [
+                            {
+                                "backend": {
+                                    "service": {
+                                        "name": f"milk-{name}",
+                                        "port": {
+                                            "number": 8080
+                                        }
+                                    }
+                                },
+                                "path": f"/milk-{name}",
+                                "pathType": "Prefix"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
 
-    return {'children': [deploy.metadata.uid, service.metadata.uid]}
+    kopf.adopt(json)
+    api = kubernetes.client.NetworkingV1Api()
+    
+    # Ingress
+    try:
+        ingress = api.create_namespaced_ingress(namespace=namespace, body=json)
+        logger.info(f"Successfully created ingress {ingress.metadata.uid}")
+    except ApiException as e:
+        logger.error(f"Failed to create ingress: {repr(e)}")
+
+    # Children
+    return {'children': [deploy.metadata.uid, service.metadata.uid, ingress.metadata.uid]}

@@ -1,0 +1,30 @@
+{
+    "apiVersion": "networking.k8s.io/v1",
+    "kind": "Ingress",
+    "metadata": {
+        "name": "milk"
+    },
+    "spec": {
+        "rules": [
+            {
+                "host": "localhost",
+                "http": {
+                    "paths": [
+                        {
+                            "backend": {
+                                "service": {
+                                    "name": "milk",
+                                    "port": {
+                                        "number": 8080
+                                    }
+                                }
+                            },
+                            "path": "/milk",
+                            "pathType": "Prefix"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
